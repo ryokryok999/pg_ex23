@@ -14,39 +14,42 @@ public class Record {
 	private String record;
 
 	public Record(String record) {
-
+		this.record = record;
 	}
 
 	public String toString() {
-		return null;
+		return record;
 	}
 
 	public char getRecordCode() {
-		return 0;
+		return record.charAt(0);
 	}
 
 	public String getOwnerTelNumber() {
-		return null;
+		return record.substring(RI_OF_OWNER_TEL_NUMBER);
 	}
 
 	public String getServiceCode() {
-		return null;
+		return record.substring(RI_OF_SERVICE_CODE, RI_OF_SERVICE_CODE + RI_SZ_SERVICE_CODE);
 	}
 
 	public String getServiceOption() {
-		return null;
+		if (record.length() < RI_OF_SERVICE_OPTION) {
+			return null;
+		}
+		return record.substring(RI_OF_SERVICE_OPTION);
 	}
 
 	public int getStartHour() {
-		return 0;
+		return Integer.parseInt(record.substring(RI_OF_CALL_START_TIME, RI_OF_CALL_START_TIME + RI_SZ_HOUR));
 	}
 
 	public int getCallMinutes() {
-		return 0;
+		return Integer.parseInt(record.substring(RI_OF_CALL_MINUTE, RI_OF_CALL_MINUTE + RI_SZ_CALL_MINUTE));
 	}
 
 	public String getCallNumber() {
-		return null;
+		return record.substring(RI_OF_CALL_NUMBER);
 	}
 
 }

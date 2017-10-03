@@ -14,29 +14,35 @@ public class FamilyService implements Service {
 	}
 
 	public void appendFamilyTelNumber(String telNumber) {
-
+		telNumbers[telNumberCount] = telNumber;
+		telNumberCount ++;
 	}
 
 	public boolean isJoined() {
-		return false;
+		return joined;
 	}
 
 	public boolean isFamilyTelNumber(String telNumber) {
+		for (int i = 0; i < telNumbers.length; i++){
+			if (telNumber.equals(telNumbers[i])){
+				return true;	
+			}
+		}
 		return false;
 	}
 
 	public void checkService(Record record) {
-
+		if (record.getServiceCode().equals(SERVICE_CODE)){
+			joined = true;
+		}
 	}
 
 	public int calcUnitPrice(Record record, int unitPrice) {
-		isFamilyTelNumber(telNumbers[0]);
-		isFamilyTelNumber(telNumbers[1]);
-		return 0;
+		return unitPrice / 2; //？？？？？？？？
 	}
 
 	public int calcBasicCharge(int basicCharge) {
-		return 0;
+		return basicCharge += BASIC_CHARGE;
 	}
 
 }

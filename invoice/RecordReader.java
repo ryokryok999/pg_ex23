@@ -1,28 +1,35 @@
 package invoice;
 
-import service.Record;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
+
+import service.Record;
 
 public class RecordReader {
 
 	private BufferedReader reader;
 
-	public RecordReader() {
-		System.out.println("コンストラクタ呼ばれました。RecordReader");
+	public RecordReader() throws FileNotFoundException {
+		this(new FileReader("data/record.log"));
 	}
 
 	public RecordReader(Reader reader) {
-
+		this.reader = new BufferedReader(reader);
 	}
 
-	public Record read() {
-		Record record = new Record(String record);
-		return null;
+	public Record read() throws IOException {
+		String record = reader.readLine();
+		if (record == null) {
+			return null;
+		}
+		return new Record(record);
 	}
 
-	public void close() {
-
+	public void close() throws IOException {
+		reader.close();
 	}
 
 }

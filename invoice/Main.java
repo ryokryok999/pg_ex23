@@ -1,5 +1,7 @@
 package invoice;
 
+import java.io.IOException;
+
 import service.Record;
 import service.Service;
 import service.ServiceCollection;
@@ -13,21 +15,15 @@ public class Main {
 	private static final char RC_CALL_LOG = '5';
 	private static final char RC_SEPARATOR = '9';
 	private static final String String = null;
-	
-	public static void main(String[] args) {
-		ServiceCollection service = new ServiceCollection();
+
+	public static void main(String[] args) throws IOException {
 		RecordReader reader = new RecordReader();
+		ServiceCollection service = new ServiceCollection();
 		InvoiceWriter writer = new InvoiceWriter();
 		Invoice invoice = new Invoice();
-		
-		Record record = reader.read();
-		char recordCode = record.getRecordCode();
-		
-		//File inputFile = new File("record.log");
-		//BufferedReader br = new BufferedReader(new FileReader(inputFile));
-		//String line = br.readLine();
-		
-		while (record != null) {
+
+		for (Record record = reader.read(); record != null; record = reader.read()) {
+			char recordCode = record.getRecordCode();
 
 			switch (recordCode){
 			case RC_OWNER_INFO:
@@ -41,22 +37,11 @@ public class Main {
 			case RC_CALL_LOG:
 				call(invoice, service, record);
 				int unitPrice = service.calcUnitPrice(record, unitPrice);
-				
-				//
-				
-				invoice.addCallCharge(callCharge);
-				
-				break;
-			case INPUT_FIRST_CHAR_KUGIRI:
-				k[Keiyakusya.getCount()-1].calcKihonRyokin();
-				k[Keiyakusya.getCount()-1].calcTsuuwaRyokin();
-				break;
 			}
 
-			line = br.readLine();
 		}
-		br.close();
-		
+
+
 	}
 
 	private static void service(Service service, Record record) {

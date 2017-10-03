@@ -11,27 +11,27 @@ public class Invoice {
 	}
 
 	public void setOwnerTelNumber(String ownerTelNumber) {
-
+		this.ownerTelNumber = ownerTelNumber;
 	}
 
 	public String getOwnerTelNumber() {
-		return null;
+		return ownerTelNumber;
 	}
 
 	public void setBasicCharge(int basicCharge) {
-
+		this.basicCharge = basicCharge;
 	}
 
 	public int getBasicCharge() {
-		return 0;
+		return basicCharge;
 	}
 
 	public void addCallCharge(int callCharge) {
-
+		this.callCharge += callCharge;
 	}
 
 	public int getCallCharge() {
-		return 0;
+		return callCharge;
 	}
 
 }
