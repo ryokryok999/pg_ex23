@@ -10,7 +10,7 @@ public class FamilyService implements Service {
 	private int telNumberCount = 0;
 
 	public void clear() {
-
+		telNumberCount = 0;
 	}
 
 	public void appendFamilyTelNumber(String telNumber) {
@@ -25,7 +25,7 @@ public class FamilyService implements Service {
 	public boolean isFamilyTelNumber(String telNumber) {
 		for (int i = 0; i < telNumbers.length; i++){
 			if (telNumber.equals(telNumbers[i])){
-				return true;	
+				return true;
 			}
 		}
 		return false;
@@ -34,11 +34,15 @@ public class FamilyService implements Service {
 	public void checkService(Record record) {
 		if (record.getServiceCode().equals(SERVICE_CODE)){
 			joined = true;
+			appendFamilyTelNumber(record.getServiceOption());
 		}
 	}
 
 	public int calcUnitPrice(Record record, int unitPrice) {
-		return unitPrice / 2; //？？？？？？？？
+		if(isJoined() & isFamilyTelNumber(record.getCallNumber())){
+			unitPrice = unitPrice / 2;
+		}
+		return unitPrice;
 	}
 
 	public int calcBasicCharge(int basicCharge) {

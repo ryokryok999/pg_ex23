@@ -24,12 +24,15 @@ public class ServiceCollection implements Service {
 	}
 
 	public int calcUnitPrice(Record record, int unitPrice) {
-		services[0].calcUnitPrice(record, unitPrice)
-		return 0;
+		unitPrice = services[0].calcUnitPrice(record, unitPrice);
+		unitPrice = services[1].calcUnitPrice(record, unitPrice);
+		return unitPrice;
 	}
 
 	public int calcBasicCharge(int basicCharge) {
-		return 0;
+		basicCharge = services[0].calcBasicCharge(basicCharge);
+		basicCharge = services[1].calcBasicCharge(basicCharge);
+		return basicCharge;
 	}
 
 }
